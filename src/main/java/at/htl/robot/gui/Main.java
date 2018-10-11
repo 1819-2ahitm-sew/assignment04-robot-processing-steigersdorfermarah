@@ -1,5 +1,6 @@
 package at.htl.robot.gui;
 
+import at.htl.robot.model.Direction;
 import at.htl.robot.model.Robot;
 import processing.core.PApplet;
 
@@ -12,7 +13,19 @@ public class Main extends PApplet {
      */
 
 
+    int height = 20;
+    private int x = 0;
+    private int y = 0;
+    private Direction direction = Direction.SOUTH;
 
+    Robot robot = new Robot();
+
+        robot.rotateLeft();
+        robot.stepForward();
+
+        System.out.println("x = " + robot.getX() );
+        System.out.println("y = " + robot.getY() );
+        System.out.println("direction = " + robot.getDirection() );
 
     // Hier die Member-Attribute eintragen
 
@@ -21,6 +34,9 @@ public class Main extends PApplet {
     }
 
     public void settings() {
+
+
+
         size(800, 800);
     }
 
@@ -35,6 +51,10 @@ public class Main extends PApplet {
      */
     public void draw() {
 
+        line(11,20, 30,40);
+
+        keyPressed();
+
     }
 
     /**
@@ -46,6 +66,7 @@ public class Main extends PApplet {
      */
     public void drawRobot(Robot robot) {
 
+        ellipse(this.x, this.y,radius, radius);
 
     }
 
@@ -53,6 +74,7 @@ public class Main extends PApplet {
      * Erstellen Sie eine eigene Methode zum Löschen des Bildschirms
      */
     public void deleteAll() {
+
 
     }
 
@@ -63,9 +85,39 @@ public class Main extends PApplet {
         println("pressed " + key + " " + keyCode);
 
         if (key == 'f' || key == 'F') {
+            if (this.direction == Direction.SOUTH) {
+                this.x = x + 1;
+            } else if (this.direction == Direction.EAST){
+                this.y = y + 1;
+
+        }else if (this.direction == Direction.NORTH){
+                this.y = y - 1;
+
+        }else if (this.direction == Direction.WEST){
+                this.x = x - 1;
+        }
+
 
         } else if (key == 'l' || key == 'L') {
 
+            if (this.direction == Direction.SOUTH) {
+                this.direction = Direction.EAST;
+
+            } else if (this.direction == Direction.EAST){
+                this.direction = Direction.NORTH;
+
+            } else if (this.direction == Direction.EAST){
+                this.direction = Direction.NORTH;
+
+            }else if(this.direction == Direction.EAST){
+                this.direction = Direction.NORTH;
+
+            }else if (this.direction == Direction.NORTH){
+                this.direction = Direction.WEST;
+
+            }else if (this.direction == Direction.WEST){
+                this.direction = Direction.SOUTH;
+            }
         }
 
     }
